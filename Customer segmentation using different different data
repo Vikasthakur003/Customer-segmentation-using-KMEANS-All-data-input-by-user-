@@ -1,0 +1,61 @@
+## We can use that project for predict the customer behavior according to the different different data 
+
+import pandas as pd
+from sklearn.preprocessing import StandardScaler
+from sklearn.cluster import KMeans
+import matplotlib.pyplot as plt
+
+n = int(input("Enter number of customer :"))
+
+Age,Annual_income,spending_hours = [],[],[]
+
+for i in range(n):
+    print(f"Customer {i + 1}")
+    Age.append(int(input("Age :")))
+    Annual_income.append(int(input("Annual_income : ")))
+    spending_hours.append(int(input("Spending_hours :")))
+
+df = pd.DataFrame({"Age": Age,
+                  "Annual_income": Annual_income,
+                  "spending_hours": spending_hours
+                  })
+
+print("Customer data \n")
+print(df)
+
+X = df[["Age","Annual_income","spending_hours"]]
+  
+scaler = StandardScaler()
+x_scaled = scaler.fit_transform(X)
+
+kmeans = KMeans(n_clusters = 3,random_state = 42)
+df["Clusters"] = kmeans.fit_predict(x_scaled)
+
+Age = int(input("Enter age :"))
+Annual_income = int(input("Enter Annual_income :"))
+spending_hours = int(input("Enter spending_hours :"))
+
+user_input = pd.DataFrame([[Age,Annual_income,spending_hours]],
+                          columns = ("Age","Annual_income","spending_hours"))
+
+user_input_scaled = scaler.transform(user_input)
+cluster = kmeans.predict(user_input_scaled)
+
+clusters_labels = {
+    0 : "premium customer",
+    1 : "Low segment customer",
+    2 : "Medium segment customer"
+}
+               
+
+print("Customer segmentation ",clusters_labels[cluster[0]])
+
+#visualisation 
+plt.figure(figsize = (10,8))
+plt.scatter(df["Age"],df["Annual_income"],c = df["Clusters"],cmap = "viridis")
+plt.xlabel("Customer Age ")
+plt.ylabel("Customer Annual income ")
+plt.title("Customer segmentation using k means")
+plt.grid(True)
+plt.show()
+
