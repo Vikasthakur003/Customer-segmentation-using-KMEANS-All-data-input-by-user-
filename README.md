@@ -44,7 +44,7 @@ Since there are **no predefined labels**, this problem is solved using **unsuper
 
 ---
 
-## 🛠️ Technologies & Libraries
+##  Technologies & Libraries
 
 * Python
 * Pandas
@@ -65,7 +65,7 @@ Since there are **no predefined labels**, this problem is solved using **unsuper
 
 ---
 
-## 📊 Customer Segments
+##  Customer Segments
 
 The clusters are interpreted as:
 
@@ -77,7 +77,7 @@ The clusters are interpreted as:
 
 ---
 
-## 📈 Visualization
+##  Visualization
 
 A scatter plot is generated showing:
 
